@@ -36,7 +36,7 @@ function displayBooks() {
     }
 }
 
-document.querySelector('#form').addEventListener('submit', (e) => {
+document.querySelector('form').addEventListener('submit', (e) => {
     // prevent actual submit
     e.preventDefault();
     //add book to library
@@ -44,8 +44,20 @@ document.querySelector('#form').addEventListener('submit', (e) => {
     console.log("Library: ", myLibrary);
 });
 
+function openForm() {
+    form.style.display = "block";
+}
+
+function closeForm() {
+    form.style.display = "none";
+    displayBooks();
+}
+
+const form = document.querySelector("#form");
 const bookList = document.querySelector(".books");
+document.querySelector("#newBook").addEventListener("click", openForm);
+document.querySelector("#closeForm").addEventListener("click", closeForm);
 
 displayBooks();
 
-const newBookButton = document.querySelector("#newBook")
+

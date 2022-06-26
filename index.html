@@ -8,17 +8,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form id="form">
-        <input type="text" id="title" placeholder="Book title...">
-        <input type="text" id="author" placeholder="Author...">
-        <input type="text" id="pages" placeholder="Number of pages">
-        <input type="checkbox" id="readStatus">
-        <label for="readStatus">I have read this book</label>
-        <button type="submit" id="addBook">Add book</button>
-    </form>
+    <button id="newBook">Add new book</button>
+    <div id="form">
+        <form>
+            <input type="text" id="title" placeholder="Book title...">
+            <input type="text" id="author" placeholder="Author...">
+            <input type="text" id="pages" placeholder="Number of pages">
+            <input type="checkbox" id="readStatus">
+            <label for="readStatus">I have read this book</label>
+            <button type="submit" id="addBook">Add book</button>
+            <button id="closeForm">Close</button>
+        </form>
+    </div>
     <ul class="books">
     </ul>
-    <button id="newBook">Add new book</button>
     <script src="myScript.js"></script>
 </body>
 </html>
