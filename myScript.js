@@ -1,6 +1,7 @@
 let myLibrary = [
     {title:'Anna Karenina', author:'Leo Tolstoy', pages:'864', readStatus:"haven't read yet"},
-    {title:'Nineteen Eighty-Four', author:'George Orwell', pages:'328', readStatus:"have been read"}
+    {title:'Nineteen Eighty-Four', author:'George Orwell', pages:'328', readStatus:"have been read"},
+    {title:'The Catcher in the Rye', author:'J. D. Salinger', pages:'234', readStatus:"have been read"}
 ];
 
 function Book(title, author, pages, readStatus) {
@@ -28,9 +29,12 @@ function addBookToLibrary() {
 }
 
 function displayBooks() {
-
+    for (let i=0; i<myLibrary.length; i++){
+        let newCard = document.createElement("li");
+        newCard.innerHTML = myLibrary[i].title + " by " + myLibrary[i].author +" " + myLibrary[i].pages + " pages"+ ". Status: " + myLibrary[i].readStatus;
+        bookList.appendChild(newCard);
+    }
 }
-
 
 document.querySelector('#form').addEventListener('submit', (e) => {
     // prevent actual submit
@@ -39,3 +43,9 @@ document.querySelector('#form').addEventListener('submit', (e) => {
     addBookToLibrary();
     console.log("Library: ", myLibrary);
 });
+
+const bookList = document.querySelector(".books");
+
+displayBooks();
+
+const newBookButton = document.querySelector("#newBook")
