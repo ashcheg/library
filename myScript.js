@@ -28,29 +28,38 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
 }
 
-function displayBooks() {
-    for (let i=0; i<myLibrary.length; i++){
-        let newCard = document.createElement("li");
-        newCard.innerHTML = myLibrary[i].title + " by " + myLibrary[i].author +" " + myLibrary[i].pages + " pages"+ ". Status: " + myLibrary[i].readStatus;
-        bookList.appendChild(newCard);
-    }
+function displayBook(i) {
+    let newCard = document.createElement("li");
+    newCard.innerHTML = myLibrary[i].title + " by " + myLibrary[i].author +" " + myLibrary[i].pages + " pages"+ ". Status: " + myLibrary[i].readStatus;
+    bookList.appendChild(newCard);
 }
 
+// Submitting and displaying new book in the library
 document.querySelector('form').addEventListener('submit', (e) => {
     // prevent actual submit
     e.preventDefault();
     //add book to library
     addBookToLibrary();
-    console.log("Library: ", myLibrary);
+    // display new added book in the library
+    displayBook((myLibrary.length-1));
+    // reset text fields
+    closeForm();
 });
 
 function openForm() {
     form.style.display = "block";
+    clearInput();
 }
 
 function closeForm() {
     form.style.display = "none";
-    displayBooks();
+}
+
+function clearInput() {
+    document.querySelector("#title").value = "";
+    document.querySelector("#author").value = "";
+    document.querySelector("#pages").value = "";
+    document.querySelector("#readStatus").checked = false;
 }
 
 const form = document.querySelector("#form");
@@ -58,6 +67,9 @@ const bookList = document.querySelector(".books");
 document.querySelector("#newBook").addEventListener("click", openForm);
 document.querySelector("#closeForm").addEventListener("click", closeForm);
 
-displayBooks();
+// Display alredy existing books in the Library
+for (i=0; i<myLibrary.length; i++) {
+    displayBook(i);
+}
 
 
