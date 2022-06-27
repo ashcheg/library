@@ -30,8 +30,18 @@ function addBookToLibrary() {
 
 function displayBook(i) {
     let newCard = document.createElement("li");
+    let deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "Delete";
+    deleteBtn.id = "deleteBook";
     newCard.innerHTML = myLibrary[i].title + " by " + myLibrary[i].author +" " + myLibrary[i].pages + " pages"+ ". Status: " + myLibrary[i].readStatus;
+    newCard.appendChild(deleteBtn);
     bookList.appendChild(newCard);
+    //add data number for reference
+    newCard.dataset.index = `${i}`;
+    deleteBtn.dataset.index = `${i}`;
+    deleteBtn.addEventListener("click", function () {
+        newCard.remove();
+    });
 }
 
 // Submitting and displaying new book in the library
@@ -62,10 +72,18 @@ function clearInput() {
     document.querySelector("#readStatus").checked = false;
 }
 
+function deleteBook(bookIndex) {
+    
+    displayedBooks = document.querySelector("#books");
+    displayedBooks.removeChild()
+}
+
 const form = document.querySelector("#form");
 const bookList = document.querySelector(".books");
+
 document.querySelector("#newBook").addEventListener("click", openForm);
 document.querySelector("#closeForm").addEventListener("click", closeForm);
+
 
 // Display alredy existing books in the Library
 for (i=0; i<myLibrary.length; i++) {
