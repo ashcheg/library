@@ -1,7 +1,7 @@
 let myLibrary = [
-    {title:'Anna Karenina', author:'Leo Tolstoy', pages:'864', readStatus:"haven't read yet"},
-    {title:'Nineteen Eighty-Four', author:'George Orwell', pages:'328', readStatus:"have been read"},
-    {title:'The Catcher in the Rye', author:'J. D. Salinger', pages:'234', readStatus:"have been read"}
+    {title:'Anna Karenina', author:'Leo Tolstoy', pages:'864', readStatus:false},
+    {title:'Nineteen Eighty-Four', author:'George Orwell', pages:'328', readStatus:true},
+    {title:'The Catcher in the Rye', author:'J. D. Salinger', pages:'234', readStatus:true}
 ];
 
 function Book(title, author, pages, readStatus) {
@@ -21,10 +21,10 @@ function addBookToLibrary() {
     let author = document.querySelector("#author");
     let pages = document.querySelector("#pages");
     let checkBox = document.querySelector("#readStatus");
-    let readStatus = "haven't read yet";
+    let readStatus = false;
     // check if the book has been read
     if (checkBox.checked) {
-        readStatus = "have been read";
+        readStatus = true;
     }
     // create book entry
     let newBook = new Book(title.value, author.value, pages.value, readStatus);
@@ -39,7 +39,7 @@ function displayBook(i) {
     deleteBtn.innerHTML = "Delete";
     deleteBtn.id = "deleteBook";
 
-    let toggleBtn = document.createElement("button");
+    let toggleBtn = document.createElement("input");
     toggleBtn.type = "checkbox";
 
     newCard.innerHTML = myLibrary[i].title + " by " + myLibrary[i].author +" " + myLibrary[i].pages + " pages"+ ". Status: " + myLibrary[i].readStatus;
@@ -52,9 +52,16 @@ function displayBook(i) {
     newCard.dataset.index = `${i}`;
     deleteBtn.dataset.index = `${i}`;
 
-    
 
-    toggleBtn.addEventListener
+    if (myLibrary[i].readStatus==true){
+        toggleBtn.checked = true;
+    } else {
+        toggleBtn.checked = false;
+    }
+
+    toggleBtn.addEventListener("click", function () {
+        myLibrary[i].toggleStatus();
+    });
     deleteBtn.addEventListener("click", function () {
         newCard.remove();
     });
