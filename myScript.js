@@ -11,6 +11,10 @@ function Book(title, author, pages, readStatus) {
     this.readStatus = readStatus
 }
 
+Book.prototype.toggleStatus = function () {
+    this.readStatus = !this.readStatus;
+}
+
 function addBookToLibrary() {
     // assign values to variables
     let title = document.querySelector("#title");
@@ -30,21 +34,33 @@ function addBookToLibrary() {
 
 function displayBook(i) {
     let newCard = document.createElement("li");
+
     let deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = "Delete";
     deleteBtn.id = "deleteBook";
+
+    let toggleBtn = document.createElement("button");
+    toggleBtn.type = "checkbox";
+
     newCard.innerHTML = myLibrary[i].title + " by " + myLibrary[i].author +" " + myLibrary[i].pages + " pages"+ ". Status: " + myLibrary[i].readStatus;
+
+    newCard.appendChild(toggleBtn);
     newCard.appendChild(deleteBtn);
     bookList.appendChild(newCard);
+
     //add data number for reference
     newCard.dataset.index = `${i}`;
     deleteBtn.dataset.index = `${i}`;
+
+    
+
+    toggleBtn.addEventListener
     deleteBtn.addEventListener("click", function () {
         newCard.remove();
     });
 }
 
-// Submitting and displaying new book in the library
+// Submitting new book to the library
 document.querySelector('form').addEventListener('submit', (e) => {
     // prevent actual submit
     e.preventDefault();
@@ -56,6 +72,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
     closeForm();
 });
 
+// pop up form commands
 function openForm() {
     form.style.display = "block";
     clearInput();
@@ -65,17 +82,12 @@ function closeForm() {
     form.style.display = "none";
 }
 
+// clear text fields
 function clearInput() {
     document.querySelector("#title").value = "";
     document.querySelector("#author").value = "";
     document.querySelector("#pages").value = "";
     document.querySelector("#readStatus").checked = false;
-}
-
-function deleteBook(bookIndex) {
-    
-    displayedBooks = document.querySelector("#books");
-    displayedBooks.removeChild()
 }
 
 const form = document.querySelector("#form");
@@ -84,10 +96,11 @@ const bookList = document.querySelector(".books");
 document.querySelector("#newBook").addEventListener("click", openForm);
 document.querySelector("#closeForm").addEventListener("click", closeForm);
 
-
 // Display alredy existing books in the Library
 for (i=0; i<myLibrary.length; i++) {
     displayBook(i);
 }
+
+
 
 
