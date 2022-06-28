@@ -8,12 +8,15 @@ function Book(title, author, pages, readStatus) {
     this.title = title
     this.author = author
     this.pages = pages
-    this.readStatus = readStatus
+    this.readStatus = false
+    /*this.toggleStatus = function() {
+        this.readStatus = false;
+    }*/
 }
 
-Book.prototype.toggleStatus = function () {
+/*Book.prototype.toggleStatus = function () {
     this.readStatus = !this.readStatus;
-}
+}*/
 
 function addBookToLibrary() {
     // assign values to variables
@@ -44,23 +47,35 @@ function displayBook(i) {
 
     newCard.innerHTML = myLibrary[i].title + " by " + myLibrary[i].author +" " + myLibrary[i].pages + " pages"+ ". Status: " + myLibrary[i].readStatus;
 
-    newCard.appendChild(toggleBtn);
-    newCard.appendChild(deleteBtn);
-    bookList.appendChild(newCard);
-
-    //add data number for reference
+    // add data number for reference
     newCard.dataset.index = `${i}`;
     deleteBtn.dataset.index = `${i}`;
 
-
-    if (myLibrary[i].readStatus==true){
+    // check if the book has been read
+    if (myLibrary[i].readStatus===true){
         toggleBtn.checked = true;
     } else {
         toggleBtn.checked = false;
     }
+    
 
+    // display all parts on the book card
+    newCard.appendChild(deleteBtn);
+    newCard.appendChild(toggleBtn);
+    bookList.appendChild(newCard);
+
+    // assign actions for new buttons
     toggleBtn.addEventListener("click", function () {
-        myLibrary[i].toggleStatus();
+        console.log(myLibrary[i].readStatus);
+        myLibrary[i].readStatus = !myLibrary[i].readStatus;
+        console.log(myLibrary[i].readStatus);
+        //console.log(myLibrary[i].readStatus);
+        //myLibrary[i].toggleStatus;
+        /*if (myLibrary[i].readStatus===true){
+            toggleBtn.checked = true;
+        } else {
+            toggleBtn.checked = false;
+        }*/
     });
     deleteBtn.addEventListener("click", function () {
         newCard.remove();
