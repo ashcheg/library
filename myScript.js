@@ -8,10 +8,7 @@ function Book(title, author, pages, readStatus) {
     this.title = title
     this.author = author
     this.pages = pages
-    this.readStatus = false
-    /*this.toggleStatus = function() {
-        this.readStatus = false;
-    }*/
+    this.readStatus = readStatus;
 }
 
 /*Book.prototype.toggleStatus = function () {
@@ -24,18 +21,21 @@ function addBookToLibrary() {
     let author = document.querySelector("#author");
     let pages = document.querySelector("#pages");
     let checkBox = document.querySelector("#readStatus");
-    let readStatus = false;
-    // check if the book has been read
+    // check read status
     if (checkBox.checked) {
         readStatus = true;
+    } else {
+        readStatus = false;
     }
     // create book entry
     let newBook = new Book(title.value, author.value, pages.value, readStatus);
     // add book to the library
     myLibrary.push(newBook);
+    console.log(newBook.readStatus);
 }
 
 function displayBook(i) {
+    // create new book card and its parts
     let newCard = document.createElement("li");
 
     let deleteBtn = document.createElement("button");
@@ -45,7 +45,10 @@ function displayBook(i) {
     let toggleBtn = document.createElement("input");
     toggleBtn.type = "checkbox";
 
-    newCard.innerHTML = myLibrary[i].title + " by " + myLibrary[i].author +" " + myLibrary[i].pages + " pages"+ ". Status: " + myLibrary[i].readStatus;
+    let statusDisplay = document.createElement("p");
+    statusDisplay.class = "statusDisplay"
+
+    newCard.innerHTML = myLibrary[i].title + " by " + myLibrary[i].author +" " + myLibrary[i].pages + " pages"+ ". Status: ";
 
     // add data number for reference
     newCard.dataset.index = `${i}`;
@@ -54,28 +57,27 @@ function displayBook(i) {
     // check if the book has been read
     if (myLibrary[i].readStatus===true){
         toggleBtn.checked = true;
+        statusDisplay.innerHTML = "have been read";
     } else {
         toggleBtn.checked = false;
+        statusDisplay.innerHTML = "hasn't been read yet";
     }
     
 
     // display all parts on the book card
-    newCard.appendChild(deleteBtn);
     newCard.appendChild(toggleBtn);
+    newCard.appendChild(statusDisplay);
+    newCard.appendChild(deleteBtn);
     bookList.appendChild(newCard);
 
     // assign actions for new buttons
     toggleBtn.addEventListener("click", function () {
-        console.log(myLibrary[i].readStatus);
         myLibrary[i].readStatus = !myLibrary[i].readStatus;
-        console.log(myLibrary[i].readStatus);
-        //console.log(myLibrary[i].readStatus);
-        //myLibrary[i].toggleStatus;
-        /*if (myLibrary[i].readStatus===true){
-            toggleBtn.checked = true;
+        if (myLibrary[i].readStatus===true){
+            statusDisplay.innerHTML = "have been read";
         } else {
-            toggleBtn.checked = false;
-        }*/
+            statusDisplay.innerHTML = "hasn't been read yet";
+        }
     });
     deleteBtn.addEventListener("click", function () {
         newCard.remove();
@@ -122,6 +124,7 @@ document.querySelector("#closeForm").addEventListener("click", closeForm);
 for (i=0; i<myLibrary.length; i++) {
     displayBook(i);
 }
+
 
 
 
