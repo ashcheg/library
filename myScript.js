@@ -31,7 +31,6 @@ function addBookToLibrary() {
     let newBook = new Book(title.value, author.value, pages.value, readStatus);
     // add book to the library
     myLibrary.push(newBook);
-    console.log(newBook.readStatus);
 }
 
 function displayBook(i) {
@@ -46,9 +45,12 @@ function displayBook(i) {
     toggleBtn.type = "checkbox";
 
     let statusDisplay = document.createElement("p");
-    statusDisplay.class = "statusDisplay"
+    statusDisplay.id = "statusDisplay";
 
-    newCard.innerHTML = myLibrary[i].title + " by " + myLibrary[i].author +" " + myLibrary[i].pages + " pages"+ ". Status: ";
+    let bookName = document.createElement("div");
+    bookName.id = "bookName";
+
+    bookName.innerHTML = myLibrary[i].title + " by " + myLibrary[i].author +" " + myLibrary[i].pages + " pages"+ ". Status: ";
 
     // add data number for reference
     newCard.dataset.index = `${i}`;
@@ -65,6 +67,7 @@ function displayBook(i) {
     
 
     // display all parts on the book card
+    newCard.appendChild(bookName);
     newCard.appendChild(toggleBtn);
     newCard.appendChild(statusDisplay);
     newCard.appendChild(deleteBtn);

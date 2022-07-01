@@ -1,4 +1,78 @@
+body {
+    margin: 0;
+}
+
 #form {
     display: none; 
     position: fixed;
 } 
+
+ul {
+    list-style-type: circle;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid grey;
+    border-radius: 7px;
+    padding: 10px;
+
+}
+
+.books {
+    margin: 20px;
+}
+
+#bookName {
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+#statusDisplay {
+    margin: 0px;
+    padding: 0px;
+    margin-right: 20px;
+    display: inline;
+    text-align: center;
+    width: 150px;
+    border: 1px grey solid;
+}
+
+#newBook {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
+
+#deleteBook {
+
+}
+
+input[type="checkbox"] {
+    margin: 0px 8px 0px 8px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#form {
+    background-color: aliceblue;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 20px;
+    border: 1px grey solid;
+}
+
+#closeForm {
+    position: fixed;
+    bottom: 256.134px;
+    right: 20px;
+}
